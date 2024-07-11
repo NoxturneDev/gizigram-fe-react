@@ -1,10 +1,19 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useDispatch } from "react-redux";
+import { setNextProgress } from "../store/scannerSlice";
 
 function ScannerInput() {
+  
+  const dispatch = useDispatch();  
+
+  const handleNext = () => {
+    dispatch(setNextProgress());
+  }
+
   return (
-    <div className="">
+    <div className="flex flex-col h-screen pb-24 w-full items-center justify-center">
       <div className="text-center mb-5">
         <h1 className="text-3xl font-semibold">Scanner</h1>
       </div>
@@ -15,9 +24,9 @@ function ScannerInput() {
           </Label>
           <Input className="h-full border-none hidden" id="picture" type="file" />
         </div>
-      </div>
-      <div className="mt-5">
-        <Button className="w-full bg-slate-700 text-white py-6 text-lg rounded-xl hover:text-black">Scan</Button>
+        <div className="mt-5 w-full">
+          <Button onClick={handleNext} className="w-full bg-slate-700 text-white py-6 text-lg rounded-xl hover:text-black">Scan</Button>
+        </div>
       </div>
     </div>
   );
