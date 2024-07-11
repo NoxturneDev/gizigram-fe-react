@@ -22,7 +22,7 @@ function Login() {
           <Input placeholder="Masukan Password" className={`rounded-xl py-6 mt-3`} id="pass" type="password" />
         </div>
         <div className="w-full">
-          <Link to="/scanner">
+          <Link to="/app/scanner">
             <Button className="bg-slate-200 w-full py-5 rounded-xl">Login</Button>
           </Link>
         </div>
