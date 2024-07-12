@@ -21,52 +21,8 @@ import { Link } from "react-router-dom";
 import ChildrenDetail from "./ChildrenDetail";
 
 export default function MainDashboard() {
-  // const [parentTableData, setParentTableData] = useState([])
-  // const [childTableData, setChildTableData] = useState([])
-
-  const [childTableData, setChildTableData] = useState([
-    {
-      ID: 1,
-      name: "Doe",
-      parent: {
-        ID: 101,
-        name: "Jane Doe",
-      },
-      age: 8,
-      gender: 1,
-      height: 130,
-      weight: 35,
-    },
-    {
-      ID: 2,
-      name: "Emily Smith",
-      parent: {
-        ID: 102,
-        name: "Robert Smith",
-      },
-      age: 7,
-      gender: 2,
-      height: 125,
-      weight: 30,
-    },
-  ]);
-
-  const [parentTableData, setParentTableData] = useState([
-    {
-      ID: 101,
-      name: "Jane Doe",
-      address: "123 Elm Street",
-      gender: 2,
-      height: 165,
-    },
-    {
-      ID: 102,
-      name: "Robert Smith",
-      address: "456 Oak Avenue",
-      gender: 1,
-      height: 175,
-    },
-  ]);
+  const [parentTableData, setParentTableData] = useState([])
+  const [childTableData, setChildTableData] = useState([])
 
   const getParentTableData = async () => {
     try {

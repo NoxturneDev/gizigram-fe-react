@@ -10,38 +10,8 @@ import { Input } from "@/components/ui/input.jsx";
 import "react-datepicker/dist/react-datepicker.css";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.jsx";
 
-function ChildrenDetail({}) {
-  const [childData, setChildData] = useState({
-    ID: 1,
-    name: "John Doe",
-    age: 8,
-    gender: 1,
-    height: 130,
-    weight: 35,
-  });
-
-  const [growthRecord, setGrowthRecord] = useState([
-    {
-      ID: 1,
-      record_count: 1,
-      height_before: 125,
-      height_after: 130,
-      weight_before: 33,
-      weight_after: 35,
-      added_height: 5,
-      added_weight: 2,
-    },
-    {
-      ID: 2,
-      record_count: 2,
-      height_before: 120,
-      height_after: 125,
-      weight_before: 30,
-      weight_after: 33,
-      added_height: 5,
-      added_weight: 3,
-    },
-  ]);
+function ChildrenDetail({ childData }) {
+  const [growthRecord, setGrowthRecord] = useState([]);
 
   const getGrowthRecord = async () => {
     try {
