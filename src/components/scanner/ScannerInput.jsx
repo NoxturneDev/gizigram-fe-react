@@ -1,11 +1,12 @@
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {Label} from "@/components/ui/label";
-import {useDispatch} from "react-redux";
-import {setNextProgress, saveScanResult} from "../store/scannerSlice";
-import {CiFileOn} from "react-icons/ci";
-import {useRef} from "react";
-import axios from "axios"
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { useDispatch } from "react-redux";
+import { setNextProgress, saveScanResult } from "../store/scannerSlice";
+import { CiFileOn } from "react-icons/ci";
+import { useRef } from "react";
+import axios from "axios";
+import jsonData from "../../response.json";
 
 function ScannerInput() {
   const dispatch = useDispatch();
@@ -13,8 +14,10 @@ function ScannerInput() {
 
   const handleImageData = (e) => {
     imgPreviewRef.current.src = window.URL.createObjectURL(e.target.files[0]);
-    const temp = JSON.parse('                    "{\\n  \\"advice\\": \\"Sebagai ahli gizi, meskipun burger terlihat lezat dan bisa dinikmati sesekali sebagai makanan, burger ini bukan makanan yang ideal untuk pertumbuhan anak berusia 5 tahun. Mengonsumsi burger secara teratur dapat menyebabkan berbagai masalah kesehatan seperti obesitas, penyakit jantung, dan kekurangan gizi. \\\\n\\\\nBerikut adalah beberapa saran untuk memastikan Galih mendapatkan nutrisi yang cukup untuk pertumbuhan dan perkembangannya:\\\\n\\\\n* **Fokus pada makanan utuh:** Tawarkan beragam buah-buahan, sayuran, biji-bijian, protein tanpa lemak, dan produk susu sebagai bagian dari diet seimbang. \\\\n* **Batasi makanan olahan:** Minimalkan makanan olahan, makanan cepat saji, dan minuman manis karena tinggi kalori, gula tidak sehat, dan lemak tidak sehat, namun rendah nutrisi penting. \\\\n* **Masak lebih banyak makanan di rumah:** Ini memungkinkan Anda untuk mengontrol bahan dan metode memasak, memastikan makanan yang lebih sehat dan bergizi untuk Galih. \\\\n* **Jadikan waktu makan menyenangkan dan positif:** Ciptakan lingkungan yang menyenangkan dan positif selama waktu makan, hindari paksaan, dan dorong Galih untuk mengeksplorasi berbagai makanan sehat.\\\\n\\\\nIngatlah, pertumbuhan yang sehat membutuhkan pendekatan yang holistik, termasuk diet seimbang, olahraga teratur, dan tidur yang cukup. Jika Anda khawatir tentang pertumbuhan Galih atau memiliki pertanyaan lebih lanjut, konsultasikan dengan ahli kesehatan atau ahli diet terdaftar untuk mendapatkan panduan yang dipersonalisasi.\\",\\n  \\"nutrition_fact\\": {\\n    \\"calories\\": \\"Tinggi\\",\\n    \\"saturated_fat\\": \\"Tinggi\\",\\n    \\"sodium\\": \\"Tinggi\\",\\n    \\"fiber\\": \\"Rendah\\",\\n    \\"sugar\\": \\"Sedang\\",\\n    \\"protein\\": \\"Sedang\\"\\n  },\\n  \\"children_data\\": {\\n    \\"name\\": \\"Galih Adhi Kusuma\\",\\n    \\"age\\": 5\\n  }\\n}\\n"\n')
-    console.log(temp)
+    const temp = JSON.parse(
+      '                    "{\\n  \\"advice\\": \\"Sebagai ahli gizi, meskipun burger terlihat lezat dan bisa dinikmati sesekali sebagai makanan, burger ini bukan makanan yang ideal untuk pertumbuhan anak berusia 5 tahun. Mengonsumsi burger secara teratur dapat menyebabkan berbagai masalah kesehatan seperti obesitas, penyakit jantung, dan kekurangan gizi. \\\\n\\\\nBerikut adalah beberapa saran untuk memastikan Galih mendapatkan nutrisi yang cukup untuk pertumbuhan dan perkembangannya:\\\\n\\\\n* **Fokus pada makanan utuh:** Tawarkan beragam buah-buahan, sayuran, biji-bijian, protein tanpa lemak, dan produk susu sebagai bagian dari diet seimbang. \\\\n* **Batasi makanan olahan:** Minimalkan makanan olahan, makanan cepat saji, dan minuman manis karena tinggi kalori, gula tidak sehat, dan lemak tidak sehat, namun rendah nutrisi penting. \\\\n* **Masak lebih banyak makanan di rumah:** Ini memungkinkan Anda untuk mengontrol bahan dan metode memasak, memastikan makanan yang lebih sehat dan bergizi untuk Galih. \\\\n* **Jadikan waktu makan menyenangkan dan positif:** Ciptakan lingkungan yang menyenangkan dan positif selama waktu makan, hindari paksaan, dan dorong Galih untuk mengeksplorasi berbagai makanan sehat.\\\\n\\\\nIngatlah, pertumbuhan yang sehat membutuhkan pendekatan yang holistik, termasuk diet seimbang, olahraga teratur, dan tidur yang cukup. Jika Anda khawatir tentang pertumbuhan Galih atau memiliki pertanyaan lebih lanjut, konsultasikan dengan ahli kesehatan atau ahli diet terdaftar untuk mendapatkan panduan yang dipersonalisasi.\\",\\n  \\"nutrition_fact\\": {\\n    \\"calories\\": \\"Tinggi\\",\\n    \\"saturated_fat\\": \\"Tinggi\\",\\n    \\"sodium\\": \\"Tinggi\\",\\n    \\"fiber\\": \\"Rendah\\",\\n    \\"sugar\\": \\"Sedang\\",\\n    \\"protein\\": \\"Sedang\\"\\n  },\\n  \\"children_data\\": {\\n    \\"name\\": \\"Galih Adhi Kusuma\\",\\n    \\"age\\": 5\\n  }\\n}\\n"\n'
+    );
+    console.log(temp);
   };
 
   const handleUploadImage = async (e) => {
@@ -22,25 +25,25 @@ function ScannerInput() {
     // const file = e.target.file.files[0];
 
     // await handleFormData({file});
-  }
+  };
 
   const handleFormData = async (data) => {
     const formData = new FormData();
-    formData.append('file', data.file);
+    formData.append("file", data.file);
 
     console.log(formData);
     try {
-      // setTimeout(() => {
-      //   setProgressStep(1);
-      // }, 3000);
+      setTimeout(() => {
+        setProgressStep(1);
+      }, 3000);
       // setLoading(true);
-      const response = await axios.post('http://localhost:8080/api/ai/scanner', formData, {
-        headers: {'Content-Type': 'multipart/form-data,'},
-      });
+      // const response = await axios.post("http://localhost:8080/api/ai/scanner", formData, {
+      //   headers: { "Content-Type": "multipart/form-data," },
+      // });
 
-      console.log(response.data)
-      if (response && response.data) {
-        dispatch(saveScanResult(response.data))
+      console.log(jsonData);
+      if (data) {
+        dispatch(saveScanResult(jsonData));
       }
     } catch (err) {
       console.log(err);
@@ -63,14 +66,13 @@ function ScannerInput() {
         <div className="h-full">
           <form action="POST" onSubmit={handleUploadImage}>
             <Label className="flex flex-col gap-y-3 items-center justify-center h-full" htmlFor="picture">
-              <CiFileOn className="text-8xl text-slate-400"/>
-              <img ref={imgPreviewRef} alt="preview"/>
+              <CiFileOn className="text-8xl text-slate-400" />
+              <img ref={imgPreviewRef} alt="preview" />
               <span className="px-4 py-2 rounded-xl text-lg text-slate-400">Input Gmabar</span>
             </Label>
-            <Input className="h-full border-none hidden" name="file" id="picture" type="file" onChange={handleImageData}/>
+            <Input className="h-full border-none hidden" name="file" id="picture" type="file" onChange={handleImageData} />
             <div className="mt-5 w-full">
-              <Button onClick={handleFormData}
-                      className="w-full bg-cyan-600 border border-cyan-600 shadow text-white py-6 text-lg rounded-xl hover:text-black">
+              <Button onClick={handleFormData} className="w-full bg-cyan-600 border border-cyan-600 shadow text-white py-6 text-lg rounded-xl hover:text-black">
                 Scan
               </Button>
             </div>
