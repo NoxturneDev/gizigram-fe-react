@@ -35,18 +35,19 @@ function ScannerInput() {
 
     console.log(formData);
     try {
-      setTimeout(() => {
-        setProgressStep(1);
-      }, 3000);
+      // setTimeout(() => {
+      //   setProgressStep(1);
+      // }, 3000);
       // setLoading(true);
-      // const response = await axios.post("http://localhost:8080/api/ai/scanner", formData, {
-      //   headers: { "Content-Type": "multipart/form-data," },
-      // });
+      const response = await axios.post("http://localhost:8080/api/ai/scanner", formData, {
+        headers: { "Content-Type": "multipart/form-data," },
+      });
 
-      console.log(jsonData);
-      if (data) {
-        dispatch(saveScanResult(jsonData));
-      }
+      // console.log(jsonData);
+      // if (data) {
+      //   dispatch(saveScanResult(jsonData));
+      // }
+      console.log(response.data)
     } catch (err) {
       console.log(err);
     } finally {

@@ -132,14 +132,15 @@ function CreateNewGrowthRecord({childId}) {
         weight_after: parseInt(formPayload.weight_after),
       };
 
-      const response = await axios.post("http://localhost:8080/api/growth-add", payload);
+      // const response = await axios.post("http://localhost:8080/api/growth-add", payload);
 
-      if (response.data) {
+      // if (response.data) {
         toast({
+          variant: "success",
           title: "Success",
           description: "Data record pertumbuhan berhasil ditambahkan",
         });
-      }
+      // }
     } catch (error) {
       toast({
         title: "Destructive",
