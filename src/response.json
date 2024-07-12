@@ -1,0 +1,20 @@
+{
+  "advice": "Meskipun burger terlihat lezat dan bisa disukai oleh anak berusia 5 tahun, burger ini bukanlah pilihan makanan yang sehat untuk pertumbuhan anak. Berikut adalah alasannya dan apa bisa Anda lakukan:\n\n* **Tinggi lemak dan natrium:** Burger, terutama yang dibeli di toko, biasanya tinggi lemak jenuh, lemak trans, dan natrium. Mengonsumsi terlalu banyak dari bahan-bahan ini da
+  pat meningkatkan risiko masalah kesehatan seperti penyakit jantung di kemudian hari.\n* **Rendah nutrisi penting:** Burger mungkin tidak menyediakan cukup vitamin, mineral, dan serat yang penting u
+  ntuk pertumbuhan dan perkembangan. \n* **Alternatif yang lebih sehat:** \n    * **Burger buatan sendiri:**  Membuat burger sendiri di rumah memungkinkan Anda untuk mengontrol bahan-bahan dan membua
+  tnya lebih sehat. Anda bisa menggunakan daging sapi tanpa lemak, roti gandum utuh, dan menambahkan banyak sayuran. \n    * **Sumber protein lain:** Sajikan berbagai sumber protein untuk anak Anda,
+  seperti ayam, ikan, telur, kacang-kacangan, dan lentil. \n    * **Makanan utuh:** Dorong anak Anda untuk mengonsumsi banyak buah-buahan, sayuran, biji-bijian, dan produk susu rendah lemak. \n\nIngatlah bahwa anak-anak membutuhkan berbagai nutrisi untuk tumbuh dan berkembang, dan penting untuk menjadikannya kebiasaan makan makanan yang seimbang dan sehat sejak usia dini.",
+  "nutrition_fact": {
+    "calories": "Tinggi",
+    "fat": "Tinggi, terutama lemak jenuh dan lemak trans",
+    "sodium": "Tinggi",
+    "protein": "Sedang",
+    "carbohydrates": "Sedang, terutama dari roti olahan",
+    "fiber": "Rendah",
+    "vitamins_and_minerals": "Rendah dalam vitamin dan mineral penting"
+  },
+  "child_data": {
+    "name": "Galih Adhi Kusuma",
+    "age": 5
+  }
+}
