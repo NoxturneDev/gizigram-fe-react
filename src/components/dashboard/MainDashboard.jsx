@@ -26,7 +26,7 @@ export default function MainDashboard() {
 
   const getParentTableData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/parents");
+      const response = await axios.get("http://103.176.78.114:8080/api/parents");
 
       if (response.data) {
         console.log(response.data.data);
@@ -39,7 +39,7 @@ export default function MainDashboard() {
 
   const getChildTableData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/childrens");
+      const response = await axios.get("http://103.176.78.114:8080/api/childrens");
 
       if (response.data) {
         console.log(response.data.data);
@@ -200,7 +200,7 @@ function CreateNewParentFormDialog() {
         gender: parseInt(formPayload.gender),
       };
 
-      const response = await axios.post("http://localhost:8080/api/parent/create", payload);
+      const response = await axios.post("http://103.176.78.114:8080/api/parent/create", payload);
 
       if (response.data) {
         console.log(response.data);
@@ -299,7 +299,7 @@ function CreateNewChildrenFormDialog() {
 
   const getParentOptions = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/parent-options");
+      const response = await axios.get("http://103.176.78.114:8080/api/parent-options");
 
       if (response.data) {
         const options = response.data.data.map((parent) => ({
@@ -340,7 +340,7 @@ function CreateNewChildrenFormDialog() {
         gender: parseInt(formPayload.gender),
       };
 
-      const response = await axios.post("http://localhost:8080/api/children/create", payload);
+      const response = await axios.post("http://103.176.78.114:8080/api/children/create", payload);
 
       if (response.data) {
         console.log(response.data);

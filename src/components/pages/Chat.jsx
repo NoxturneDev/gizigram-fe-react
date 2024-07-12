@@ -31,7 +31,7 @@ function Chat() {
 
   const getChatResponse = async (description) => {
     try {
-      const res = await axios.post('http://localhost:8080/api/ai/recipe', {description});
+      const res = await axios.post('http://103.176.78.114:8080/api/ai/recipe', {description});
       const temp = res.data.data[0].Content.Parts[0]
       return temp
     } catch (error) {
