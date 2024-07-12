@@ -2,6 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   scannerProgress: 1,
+  scanResultJson: {
+    advice: null,
+  },
+  scanResultString: '',
 }
 
 const scannerSlice = createSlice({
@@ -14,9 +18,13 @@ const scannerSlice = createSlice({
     },
     setPreviosProgress(state) {
       state.scannerProgress -= 1
+    },
+    saveScanResult(state, action) {
+      state.scanResultJson = action.payload
+      state.scanResultString = JSON.stringify(action.payload?.advice, null, 2)
     }
   }
 })
 
-export const { setNextProgress, setPreviosProgress } = scannerSlice.actions
+export const { setNextProgress, setPreviosProgress , saveScanResult} = scannerSlice.actions
 export default scannerSlice.reducer

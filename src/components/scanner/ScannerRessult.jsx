@@ -2,15 +2,20 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setPreviosProgress } from "../store/scannerSlice";
+import {useSelector} from "react-redux";
+import {useEffect} from "react";
 
 export default function ScannerRessult() {
-
+  const {scanResultJson, scanResultString} = useSelector((state) => state.scanner)
   const dispatch = useDispatch()
 
-
-  const handlePrevios = () => { 
+  const handlePrevios = () => {
     dispatch(setPreviosProgress())
   }
+
+  useEffect(() => {
+    console.log(scanResultJson)
+  }, []);
 
   return (
     <>
