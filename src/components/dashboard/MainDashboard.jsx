@@ -17,7 +17,7 @@ import FormDashbboard from "./FormDashbboard";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.jsx";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import ChildrenDetail from "./ChildrenDetail";
 
 export default function MainDashboard() {
@@ -172,6 +172,7 @@ export default function MainDashboard() {
 }
 
 function CreateNewParentFormDialog() {
+  const navigate = useNavigate(0)
   const payload = {
     name: "",
     phone_number: "",
@@ -207,6 +208,8 @@ function CreateNewParentFormDialog() {
       console.log(formPayload);
     } catch (error) {
       console.error(error);
+    } finally {
+      navigate(0)
     }
   };
 
@@ -280,6 +283,7 @@ function CreateNewParentFormDialog() {
 }
 
 function CreateNewChildrenFormDialog() {
+  const navigate = useNavigate()
   const payload = {
     name: "",
     age: 0,
@@ -344,6 +348,8 @@ function CreateNewChildrenFormDialog() {
       console.log(formPayload);
     } catch (error) {
       console.error(error);
+    } finally {
+      navigate(0)
     }
   };
 

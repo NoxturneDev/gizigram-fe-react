@@ -12,6 +12,7 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group.jsx";
 import {Chart, CategoryScale, registerables} from "chart.js";
 import {Line} from "react-chartjs-2";
 import {useToast} from "@/components/ui/use-toast.js";
+import {useNavigate} from "react-router-dom";
 
 Chart.register(...registerables);
 
@@ -108,6 +109,7 @@ function ChildrenDetail({childData}) {
 
 function CreateNewGrowthRecord({childId}) {
   const {toast} = useToast();
+  const navigate = useNavigate()
   const payload = {
     children_id: childId, weight_after: null, height_after: null, record_date: new Date(),
   }
@@ -132,20 +134,22 @@ function CreateNewGrowthRecord({childId}) {
         weight_after: parseInt(formPayload.weight_after),
       };
 
-      // const response = await axios.post("http://localhost:8080/api/growth-add", payload);
+      const response = await axios.post("http://localhost:8080/api/growth-add", payload);
 
-      // if (response.data) {
+      if (response.data) {
         toast({
           variant: "success",
           title: "Success",
           description: "Data record pertumbuhan berhasil ditambahkan",
         });
-      // }
+      }
     } catch (error) {
       toast({
         title: "Destructive",
         description: error,
       });
+    } finally {
+      navigate(0)
     }
   };
 
