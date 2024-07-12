@@ -7,7 +7,6 @@ function Toastify() {
   const { toast } = useToast();
   return (
     <Button
-      variant="outline"
       onClick={() => {
         toast({
           title: "Uh oh! Something went wrong.",
