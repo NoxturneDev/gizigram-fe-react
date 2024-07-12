@@ -25,6 +25,8 @@ import FormDashbboard from "./FormDashbboard";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group.jsx";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
+import {Link} from "react-router-dom";
+import ChildrenDetail from "./ChildrenDetail";
 
 export default function MainDashboard() {
   const [parentTableData, setParentTableData] = useState([])
@@ -127,6 +129,7 @@ export default function MainDashboard() {
                 <TableCell>{child.weight}</TableCell>
                 <TableCell>{child.height}</TableCell>
                 <TableCell>Normal</TableCell>
+                <ChildrenDetail childData={child}/>
                 <TableActionButton/>
               </TableRow>
             ))}
@@ -438,15 +441,6 @@ function CreateNewChildrenFormDialog() {
 function TableActionButton() {
   return (
     <TableCell className="flex gap-x-2">
-      <Dialog>
-        <DialogTrigger asChild>
-          <button
-            className={`bg-blue-500 flex ${true ? "rounded" : "rounded-md"} items-center gap-x-1 text-white px-3 py-2`}>
-            <FaEdit/> <span>Edit</span>
-          </button>
-        </DialogTrigger>
-        <FormDashbboard/>
-      </Dialog>
       <Dialog>
         <DialogTrigger asChild>
           <button
