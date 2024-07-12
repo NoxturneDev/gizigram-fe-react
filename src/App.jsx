@@ -8,6 +8,7 @@ import Notification from "./components/pages/Notification";
 import Chat from "./components/pages/Chat";
 import Profile from "./components/pages/ProfileUser";
 import MainDashboard from "./components/dashboard/MainDashboard";
+import {Toaster} from "@/components/ui/toaster.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <Toaster />
     </>
   );
 }
