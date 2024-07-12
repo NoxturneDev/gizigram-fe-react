@@ -4,11 +4,15 @@ import { DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger }
 import { Button } from "@/components/ui/button.jsx";
 import { FaPlus } from "react-icons/fa";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Label } from "@/components/ui/label.jsx";
 import { Input } from "@/components/ui/input.jsx";
 import "react-datepicker/dist/react-datepicker.css";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.jsx";
+import {Chart, CategoryScale, registerables} from "chart.js";
+import {Line} from "react-chartjs-2";
+
+Chart.register(...registerables);
 
 function ChildrenDetail({}) {
   const [childData, setChildData] = useState({
@@ -63,63 +67,81 @@ function ChildrenDetail({}) {
 
   return (
     <Dialog className="flex">
-      <DialogTrigger asChild>
-        <Button className="flex gap-4 justify-center items-center bg-primaryFigma text-white border border-primaryFigma hover:text-primaryFigma rounded-full shadow-md shadow-secondaryFigma" type="submit">
-          Detail
-          <FaPlus />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className={`bg-white max-w-6xl font-poppins`}>
-        <DialogHeader>
-          <DialogTitle>Edit Data Anak</DialogTitle>
-          <h3>Nama: {childData.name}</h3>
-          <h3>Umur: {childData.age}</h3>
-          <h3>Jenis Kelamin: {childData.gender === 1 ? "Laki-laki" : "Perempuan"}</h3>
-          <h3>Tinggi badan (cm): {childData.height}</h3>
-          <h3>Berat badan(kg): {childData.weight}</h3>
-        </DialogHeader>
-        <CreateNewGrowthRecord childId={childData.ID} />
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Cek ke</TableHead>
-              <TableHead>Tinggi sebelumnya</TableHead>
-              <TableHead>Tinggi setelahnya</TableHead>
-              <TableHead>Berat sebelumnya</TableHead>
-              <TableHead>Berat setelahnya</TableHead>
-              <TableHead>Perubahan Tinggi (cm)</TableHead>
-              <TableHead>Perubahan Berat (kg)</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {growthRecord &&
-              growthRecord.map((record) => (
-                <TableRow key={record.ID}>
-                  <TableCell>{record.record_count}</TableCell>
-                  <TableCell>{record.height_before}</TableCell>
-                  <TableCell>{record.height_after}</TableCell>
-                  <TableCell>{record.weight_before}</TableCell>
-                  <TableCell>{record.weight_after}</TableCell>
-                  <TableCell>{record.added_height}</TableCell>
-                  <TableCell>{record.added_weight}</TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </DialogContent>
-    </Dialog>
-  );
+    <DialogTrigger asChild>
+      <Button
+        className="m-auto flex gap-4 justify-center items-center bg-primaryFigma text-white border border-primaryFigma hover:text-primaryFigma rounded-full shadow-md shadow-secondaryFigma"
+        type="submit">
+        Detail
+        <FaPlus/>
+      </Button>
+    </DialogTrigger>
+    <DialogContent className="bg-white">
+      <DialogHeader>
+        <DialogTitle>Edit Data Anak</DialogTitle>
+        <h3>Nama: {childData.name}</h3>
+        <h3>Umur: {childData.age}</h3>
+        <h3>Jenis Kelamin: {childData.gender === 1 ? 'Laki-laki' : 'Perempuan'}</h3>
+        <h3>Tinggi badan (cm): {childData.height}</h3>
+        <h3>Berat badan(kg): {childData.weight}</h3>
+      </DialogHeader>
+      <CreateNewGrowthRecord childId={childData.ID}/>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Cek ke</TableHead>
+            <TableHead>Tinggi sebelumnya</TableHead>
+            <TableHead>Tinggi setelahnya</TableHead>
+            <TableHead>Berat sebelumnya</TableHead>
+            <TableHead>Berat setelahnya</TableHead>
+            <TableHead>Perubahan Tinggi (cm)</TableHead>
+            <TableHead>Perubahan Berat (kg)</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {growthRecord && growthRecord.map((record) => (<TableRow key={record.ID}>
+            <TableCell>{record.record_count}</TableCell>
+            <TableCell>{record.height_before}</TableCell>
+            <TableCell>{record.height_after}</TableCell>
+            <TableCell>{record.weight_before}</TableCell>
+            <TableCell>{record.weight_after}</TableCell>
+            <TableCell>{record.added_height}</TableCell>
+            <TableCell>{record.added_weight}</TableCell>
+          </TableRow>))}
+        </TableBody>
+      </Table>
+      <div className="w-full">
+        <Line
+          data={{
+            type: 'line',
+            labels: growthRecord.map((record) => record.record_count),
+            datasets: [
+              {
+                label: 'Tinggi Badan',
+                data: growthRecord.map((record) => record.added_height),
+                fill: false,
+                borderColor: 'red',
+              },
+              {
+                label: 'Berat Badan',
+                data: growthRecord.map((record) => record.added_weight),
+                fill: false,
+                borderColor: 'blue',
+              },
+            ],
+          }}
+        />
+      </div>
+    </DialogContent>
+  </Dialog>)
 }
 
 function CreateNewGrowthRecord({ childId }) {
   const payload = {
-    children_id: childId,
-    weight_after: null,
-    height_after: null,
-    record_date: new Date(),
-  };
+    children_id: childId, weight_after: null, height_after: null, record_date: new Date(),
+  }
 
   const [formPayload, setFormPaylaod] = useState(payload);
+  const canvasRef = useRef(null)
 
   const handleFormChange = (e) => {
     const temp = { ...formPayload };
@@ -186,4 +208,5 @@ function CreateNewGrowthRecord({ childId }) {
     </Dialog>
   );
 }
+
 export default ChildrenDetail;
