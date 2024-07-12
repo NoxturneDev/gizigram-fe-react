@@ -7,26 +7,23 @@ import { IoIosNotifications } from "react-icons/io";
 import { IoMdQrScanner } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegStickyNote } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
-    <header className="py-3 border-t bg-white px-3 border-slate-500 fixed bottom-0 w-full">
+    <header className="pt-7 pb-3 border-t justify-center bg-cyan-500 flex items-center border-black fixed bottom-0 w-full z-10">
       <NavigationMenu>
         <NavigationMenuList>
-          <NavigationList>
-            <FaPlus />
-          </NavigationList>
-          <NavigationList>
+          <NavigationList to="/app/chat" title="Recipe">
             <FaRegStickyNote />
           </NavigationList>
-          <NavigationList>
+          <NavigationList to="/app/scanner" title="Scanner">
             <IoMdQrScanner />
           </NavigationList>
-          <NavigationList>
+          <NavigationList to="/app/notification" title="Notification">
             <IoIosNotifications />
           </NavigationList>
-          <NavigationList>
+          <NavigationList to="/app/profile" title="Profile">
             <FaRegUser />
           </NavigationList>
         </NavigationMenuList>
@@ -37,11 +34,16 @@ function Navigation() {
 
 export default Navigation;
 
-function NavigationList({ children }) {
+function NavigationList({ children, to, title }) {
   return (
-    <NavigationMenuItem>
+    <NavigationMenuItem className="px-3">
       <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-3xl">{children}</div>
+        <div className="w-10 h-10 rounded-full flex items-center flex-col  gap-y-1 justify-center text-white">
+          <Link className="text-3xl" to={to}>
+            {children}
+          </Link>
+          <p>{title}</p>
+        </div>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );
