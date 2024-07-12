@@ -1,10 +1,10 @@
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {Label} from "@/components/ui/label";
-import {useDispatch} from "react-redux";
-import {setNextProgress, saveScanResult} from "../store/scannerSlice";
-import {CiFileOn} from "react-icons/ci";
-import {useRef, useState} from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { useDispatch } from "react-redux";
+import { setNextProgress, saveScanResult } from "../store/scannerSlice";
+import { CiFileOn } from "react-icons/ci";
+import { useRef, useState } from "react";
 import axios from "axios";
 import jsonData from "../../response.json";
 
@@ -39,8 +39,8 @@ function ScannerInput() {
       //   setProgressStep(1);
       // }, 3000);
       // setLoading(true);
-      const response = await axios.post("http://103.176.78.114:8080/api/ai/scanner", formData, {
-        headers: {"Content-Type": "multipart/form-data,"},
+      const response = await axios.post("http://localhost:8080/api/ai/scanner", formData, {
+        headers: { "Content-Type": "multipart/form-data," },
       });
 
       // console.log(jsonData);
@@ -68,18 +68,14 @@ function ScannerInput() {
       <div className="w-72 bg-slate-200 rounded-xl">
         <div className="h-full">
           <form action="POST" onSubmit={handleUploadImage}>
-            <Label
-              className={`${isImageUploaded ? "hidden" : "flex flex-col gap-y-3 items-center justify-center h-full"} `}
-              htmlFor="picture">
-              <CiFileOn className={`${imgPreviewRef?.current?.src ? "hidden" : "block"} text-8xl text-slate-400`}/>
+            <Label className={`${isImageUploaded ? "hidden" : "flex flex-col gap-y-3 items-center justify-center h-full"} `} htmlFor="picture">
+              <CiFileOn className={`${imgPreviewRef?.current?.src ? "hidden" : "block"} text-8xl text-slate-400`} />
               <span className="px-4 py-2 rounded-xl text-lg text-slate-400">Input Gmabar</span>
             </Label>
-            <img ref={imgPreviewRef} alt="preview"/>
-            <Input className="h-full border-none hidden" name="file" id="picture" type="file"
-                   onChange={handleImageData}/>
+              <img ref={imgPreviewRef} alt="preview" />
+            <Input className="h-full border-none hidden" name="file" id="picture" type="file" onChange={handleImageData} />
             <div className="mt-7 w-full">
-              <Button onClick={handleFormData}
-                      className="w-full bg-cyan-600 border border-cyan-600 shadow text-white py-6 text-lg rounded-xl hover:text-black">
+              <Button onClick={handleFormData} className="w-full bg-cyan-600 border border-cyan-600 shadow text-white py-6 text-lg rounded-xl hover:text-black">
                 Scan
               </Button>
             </div>

@@ -21,7 +21,7 @@ function ChildrenDetail({childData}) {
 
   const getGrowthRecord = async () => {
     try {
-      const response = await axios.get(`http://103.176.78.114:8080/api/growth/${childData.ID}`);
+      const response = await axios.get(`http://localhost:8080/api/growth/${childData.ID}`);
 
       if (response.data && response.data.data.length !== 0) {
         setGrowthRecord(response.data.data);
@@ -134,7 +134,7 @@ function CreateNewGrowthRecord({childId}) {
         weight_after: parseInt(formPayload.weight_after),
       };
 
-      const response = await axios.post("http://103.176.78.114:8080/api/growth-add", payload);
+      const response = await axios.post("http://localhost:8080/api/growth-add", payload);
 
       if (response.data) {
         toast({
