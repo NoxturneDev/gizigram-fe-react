@@ -8,8 +8,6 @@ import {FaEdit} from "react-icons/fa";
 import {FaTrashAlt} from "react-icons/fa";
 import {CiSearch} from "react-icons/ci";
 import {FaPlus} from "react-icons/fa";
-
-import {Button} from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +19,10 @@ import {
 } from "@/components/ui/dialog";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
+import {Button} from "@/components/ui/button";
 import axios from "axios";
+import FormDashbboard from "./FormDashbboard";
+import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group.jsx";
 
 export default function MainDashboard() {
   const [parentTableData, setParentTableData] = useState([])
@@ -119,7 +120,7 @@ export default function MainDashboard() {
             {childTableData && childTableData.map((child) => (
               <TableRow>
                 <TableCell>{child.name}</TableCell>
-                <TableCell>{child.name}</TableCell>
+                <TableCell>{child.parent.name}</TableCell>
                 <TableCell>{child.age} Tahun</TableCell>
                 <TableCell>{child.gender === 1 ? 'Laki-laki' : 'Perempuan'}</TableCell>
                 <TableCell>{child.weight}</TableCell>
@@ -141,7 +142,7 @@ export default function MainDashboard() {
             <Input className="rounded-full border-slate-400" placeholder="Search"/>
           </div>
           <div className="w-full text-end">
-            <CreateNewParentFormDialog />
+            <CreateNewParentFormDialog/>
           </div>
         </div>
         <Table>
@@ -194,7 +195,7 @@ function CreateNewParentFormDialog() {
 
     try {
       const payload = {
-         ...formPayload,
+        ...formPayload,
         height: parseInt(formPayload.height),
         gender: parseInt(formPayload.gender),
       }
@@ -205,7 +206,7 @@ function CreateNewParentFormDialog() {
         console.log(response.data)
       }
       console.log(formPayload)
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
 
@@ -218,41 +219,59 @@ function CreateNewParentFormDialog() {
           <FaPlus/>
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white">
+      <DialogContent className="bg-white font-poppins">
+        <DialogHeader>
+          <DialogTitle>Edit Data Anak</DialogTitle>
+        </DialogHeader>
         <form onSubmit={handleSubmitParent} onChange={handleFormChange}>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Nama Lengkap
-              </Label>
-              <Input id="name" defaultValue="Pedro Duarte" className="col-span-3"/>
+          <div className="flex flex-col gap-y-5">
+            <div className="flex items-center gap-4">
+              <Label className="w-2/6" htmlFor="name">Nama Lengkap</Label>
+              <Input placeholder="Masukan Nama Lengkap" id="name"
+                     className={`w-full border-slate-400 rounded-full placeholder:text-slate-400`}/>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="phone_number" className="text-right">
-                No Handphone
-              </Label>
-              <Input id="phone_number" defaultValue="phone_number" className="col-span-3"/>
+            <div className="flex items-center gap-4">
+              <Label className="w-2/6" htmlFor="phone_number">No Handphone</Label>
+              <Input placeholder="Masukan No. Handphone" id="phone_number"
+                     className={`w-full border-slate-400 rounded-full placeholder:text-slate-400`}/>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="address" className="text-right">
-                Alamat
-              </Label>
-              <Input id="address" defaultValue="address" className="col-span-3"/>
+            <div className="flex items-center gap-4">
+              <Label className="w-2/6" htmlFor="nik">NIK</Label>
+              <Input placeholder="NIK" id="nik"
+                     className={`w-full border-slate-400 rounded-full placeholder:text-slate-400`}/>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="height" className="text-right">
-                Tinggi Badan
-              </Label>
-              <Input type="number" id="height" defaultValue="height" className="col-span-3"/>
+            <div className="flex items-center gap-4">
+              <Label className="w-2/6" htmlFor="address">Alamat</Label>
+              <Input placeholder="Alamat..." id="address"
+                     className={`w-full border-slate-400 rounded-full placeholder:text-slate-400`}/>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="gender" className="text-right">
-                Gender
-              </Label>
-              <Input type="number" id="gender" defaultValue="gender" className="col-span-3"/>
+            <div className="flex items-center gap-4">
+              <Label className="w-2/6" htmlFor="height">Tinggi Badan</Label>
+              <Input placeholder="height" id="height"
+                     className={`w-full border-slate-400 rounded-full placeholder:text-slate-400`}/>
+            </div>
+            <div className="flex items-center gap-x-10 mx-5">
+              <Label htmlFor="name">Jenis Kelamin</Label>
+              <RadioGroup className="flex gap-x-5 mt-3 justify-start" defaultValue="Ya">
+                <div className={`flex items-center rounded-full gap-x-3 bg-secondaryFigma justify-center px-3 w-full`}>
+                  <RadioGroupItem value="1" id="r1"/>
+                  <Label htmlFor="r1">
+                    Laki-Laki
+                  </Label>
+                </div>
+                <div
+                  className={`flex items-center rounded-full gap-x-3 bg-secondaryFigma justify-center px-3 py-1 w-full`}>
+                  <RadioGroupItem value="2" id="r2"/>
+                  <Label htmlFor="r2">
+                    Perempuan
+                  </Label>
+                </div>
+              </RadioGroup>
             </div>
           </div>
-          <Button type="submit">Save changes</Button>
+          <DialogFooter className="mt-5">
+            <Button type="submit" className="bg-primaryFigma w-full text-white border border-primaryFigma hover:text-primaryFigma rounded-full shadow-md shadow-secondaryFigma" type="submit">Save changes</Button>
+          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
@@ -269,29 +288,7 @@ function TableActionButton() {
             <FaEdit/> <span>Edit</span>
           </button>
         </DialogTrigger>
-        <DialogContent className="bg-white">
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>Make changes to your profile here. Click save when you're done.</DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" defaultValue="Pedro Duarte" className="col-span-3"/>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" defaultValue="@peduarte" className="col-span-3"/>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
-        </DialogContent>
+        <FormDashbboard/>
       </Dialog>
       <Dialog>
         <DialogTrigger asChild>
@@ -300,29 +297,7 @@ function TableActionButton() {
             <FaTrashAlt/> <span>Delete</span>
           </button>
         </DialogTrigger>
-        <DialogContent className="bg-white">
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>Make changes to your profile here. Click save when you're done.</DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" defaultValue="Pedro Duarte" className="col-span-3"/>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" defaultValue="@peduarte" className="col-span-3"/>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
-        </DialogContent>
+        <FormDashbboard/>
       </Dialog>
     </TableCell>
   );
